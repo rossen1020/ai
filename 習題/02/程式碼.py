@@ -9,32 +9,48 @@ citys = [
     (3, 1), (3, 2)
 ]
 
-def distance(p1, p2):
-    x1, y1 = p1
-    x2, y2 = p2
-    return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
+def dis(p1, p2):
+    x1, y1= p1
+    x2, y2= p2
+    return((x2 -x1)** 2 +(y2 - y1)** 2)** 0.5
 
-def pathLength(p, citys):
-    dist = 0
-    plen = len(p)
+def pL(p, citys):
+    dist= 0
+    plen= len(p)
     for i in range(plen):
-        dist += distance(citys[p[i]], citys[p[(i + 1) % plen]])
+        dist +=dis(citys[p[i]], citys[p[(i + 1)% plen ]])
     return dist
 
-def dynamicProgramming(citys):
-    n = len(citys)
-    dp = np.full((1 << n, n), float('inf'))
-    dp[1][0] = 0
+def Pro(citys):
+    n= len(citys)
+    dp= np.full((1<< n, n), float('inf'))
+    dp[1][0]=  0
+    parent= np.full((1 << n, n), -1)
 
-    for mask in range(1, 1 << n):
+    for m in range(1, 1<< n):
         for i in range(n):
-            if mask & (1 << i):
+            if m &(1<< i):
                 for j in range(n):
-                    if i != j and mask & (1 << j):
-                        dp[mask][i] = min(dp[mask][i], dp[mask ^ (1 << i)][j] + distance(citys[j], citys[i]))
+                    if i !=j and m&(1 << j):
+                        if dp[m ^(1<< i)][j] +dis(citys[j], citys[i])< dp[m][i]:
+                            dp[m][i]= dp[m^ (1 << i)][j]+ dis(citys[j], citys[i])
+                            parent[m][i]= j
 
-    min_dist = min([dp[(1 << n) - 1][i] + distance(citys[i], citys[0]) for i in range(1, n)])
-    return min_dist
+    m= (1<< n)- 1
+    i= np.argmin([dp[m][i]+ dis(citys[i], citys[0]) for i in range(n)])
+    min_dist= dp[m][i]+ dis(citys[i], citys[0])
 
-min_distance = dynamicProgramming(citys)
-print("Minimized Distance:", min_distance)
+    p= []
+    while i != -1:
+        p.append(i)
+        n= parent[m][i]
+        m ^= (1<< i)
+        i= n
+
+    p.reverse()
+    return min_dist, p
+
+min_dis, p= Pro(citys)
+print("最短距離:", min_dis)
+print("最佳路徑:", p)
+print("長度:", pL(p, citys))
