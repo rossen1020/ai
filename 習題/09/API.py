@@ -1,0 +1,1 @@
+GROQ_API_KEY=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 python groqchat.py 
