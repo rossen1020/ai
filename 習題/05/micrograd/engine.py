@@ -89,7 +89,7 @@ class Value:
     def __rtruediv__(self, other): # other / self
         return other * self**-1
 
-    def __repr__(self): # 轉字串 -- https://www.educative.io/edpresso/what-is-the-repr-method-in-python
+    def __repr__(self): -- https://www.educative.io/edpresso/what-is-the-repr-method-in-python
         return f"Value(data={self.data}, grad={self.grad})"
     
     
