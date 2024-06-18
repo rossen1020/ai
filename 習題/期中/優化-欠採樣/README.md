@@ -2,7 +2,7 @@
 這將會引響我們在訓練模型時, 造成一些植物分類表現很好一些不好, 而解決方法我採用欠採樣去平衡資料
 但因為此方法是透過將每類的數量去隨機選取至與最少數量的類相同,所以我透過採用合成樣本+特徵構建+PCA
 這三種方法去進行數據擴大</P>
-<P> Ps. 因為檔案比較大, 我是在kaggle網站上進行訓練, 詳細內容請在(https://www.kaggle.com/code/mostytasen/undersampling/edit)
+<P> Ps. 因為檔案比較大, 我是在kaggle網站上進行訓練, 詳細內容請在(https://www.kaggle.com/code/mostytasen/undersampling)
 查看, 完整訓練過程都有在這裏面, 我還有做其他方法, 但因為效果還好就沒放了
 以下是訓練過程的簡單解說
 </p> 
